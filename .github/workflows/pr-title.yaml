@@ -8,7 +8,6 @@ on:
 
 jobs:
   validate-pr-title:
-    if: ${{ github.repository_owner == 'justasimpletest214' }}
     name: Validate PR Title
     runs-on: ubuntu-latest
     steps:
