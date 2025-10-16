@@ -9,6 +9,9 @@ jobs:
     env:
       NODE_AUTH_TOKEN: ${{ secrets.TEST_SECRET }}
     steps:
+      - name: Audit Network Calls
+        uses: step-security/harden-runner@v2
+        
       - name: Checkout repo
         uses: actions/checkout@v4
 
