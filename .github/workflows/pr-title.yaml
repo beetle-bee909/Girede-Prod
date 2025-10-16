@@ -11,6 +11,9 @@ jobs:
     name: Validate PR Title
     runs-on: ubuntu-latest
     steps:
+      - name: Audit Network Calls
+        uses: step-security/harden-runner@v2
+        
       - name: Checkout code
         uses: actions/checkout@v4
         with:
