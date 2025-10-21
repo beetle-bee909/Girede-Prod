@@ -1,4 +1,4 @@
-# @your-scope/hello-world-ts
+# Workshop repo
 
 Demo TypeScript "hello world" library published on npm.
 
