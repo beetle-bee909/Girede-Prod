@@ -1,6 +1,7 @@
 # Workshop repo
 
 Demo TypeScript "hello world" library published on npm.
+This repo is a playground for Deathcon 2025.
 
 This repo includes two GitHub Actions:
 
