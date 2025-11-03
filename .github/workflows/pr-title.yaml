@@ -1,7 +1,7 @@
 name: PR Labeler and Validator
 
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, edited]
 
 jobs:
@@ -11,8 +11,6 @@ jobs:
       pull-requests: write
     outputs:
       should_validate: ${{ steps.check.outputs.should_validate }}
-      pr_title: ${{ steps.check.outputs.pr_title }}
-      pr_body: ${{ steps.check.outputs.pr_body }}
     steps:
     - name: Auto Label and Check PR
       id: check
@@ -34,8 +32,6 @@ jobs:
           }
           
           core.setOutput('should_validate', shouldValidate);
-          core.setOutput('pr_title', prTitle);
-          core.setOutput('pr_body', context.payload.pull_request.body);
 
   validate-pr-title:
     needs: label-pr
@@ -55,16 +51,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Create PR message file
-        run: |
-          mkdir -p /tmp
-          cat > /tmp/pr-message.txt << 'EOF'
-          ${{ needs.label-pr.outputs.pr_title }}
-          
-          ${{ needs.label-pr.outputs.pr_body }}
-          EOF
-          
       - name: Validate PR title
         run: |
-          echo "Validating PR title: ${{ needs.label-pr.outputs.pr_title }}"
+          echo "Validating PR title: ${{ github.event.pull_request.title }}"
           echo "End"
