@@ -3,7 +3,7 @@ export type HelloOptions = {
 };
 
 /**
- * Returns a friendly greeting.
+ * Returns a friendly greeting
  */
 export function hello(options: HelloOptions = {}): string {
   const who = options.name?.trim() || "world";
