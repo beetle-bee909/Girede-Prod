@@ -1,14 +1,12 @@
 name: PR Title Validation
 
 on:
-  pull_request:
-    types: [opened, edited, synchronize, reopened]
   pull_request_target:
     types: [labeled]
 
 jobs:
   validate-pr-title:
-    if: ${{ github.event.label.name == 'deathcon' }}
+    if: github.event.label.name == 'deathcon'
     name: Validate PR Title
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -19,8 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          # For pull_request_target, we need to checkout the base branch
-          ref: ${{ github.event.pull_request.base.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
