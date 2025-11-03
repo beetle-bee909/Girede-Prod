@@ -2,13 +2,8 @@ name: PR Labeler and Validator
 
 on:
   pull_request_target:
-    types: [opened, edited]
+    types: [opened]
 
-permissions:
-  contents: write       # Enables attacks 1 & 2
-  actions: write        # Enables attack 3
-  pull-requests: write  # For the auto-labeler functionality
-  
 jobs:
   label-pr:
     runs-on: ubuntu-latest
