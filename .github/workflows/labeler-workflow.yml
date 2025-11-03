@@ -2,20 +2,30 @@ name: PR Labeler
 
 on:
   pull_request:
-    types: [opened]
-
-permissions:
-  contents: read
-  pull-requests: write
+    types: [opened, edited]
 
 jobs:
   label-pr:
     runs-on: ubuntu-latest
+    permissions:
+      content: read
+      pull-requests: write
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-    - name: Auto Label PR
-      uses: actions/labeler@v6
+    - name: Auto Label PR by Title
+      uses: actions/github-script@v7
       with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        configuration-path: .github/labeler.yml
+        script: |
+          const prTitle = context.payload.pull_request.title;
+          
+          // Check if title starts with [Deathcon] (case insensitive)
+          if (/^\[deathcon\]/i.test(prTitle)) {
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              labels: ['deathcon']
+            });
+            console.log('Added "deathcon" label to PR');
+          } else {
+            console.log('PR title does not match pattern, skipping');
+          }
