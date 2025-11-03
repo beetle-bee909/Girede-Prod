@@ -1,3 +1,2 @@
 deathcon:
-  - pr:
-      title: '^\[Deathcon\]'
+  - title: '(?i)^\[Deathcon\]'
