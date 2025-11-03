@@ -4,12 +4,12 @@ on:
   pull_request:
     types: [opened, edited]
 
+permissions:
+  pull-requests: write
+
 jobs:
   label-pr:
     runs-on: ubuntu-latest
-    permissions:
-      content: read
-      pull-requests: write
     steps:
     - name: Auto Label PR by Title
       uses: actions/github-script@v7
