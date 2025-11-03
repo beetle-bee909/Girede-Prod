@@ -1,0 +1,3 @@
+workshop:
+  - pr:
+      title: ['^deathcon:']
