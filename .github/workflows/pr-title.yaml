@@ -4,11 +4,14 @@ on:
   pull_request:
     types: [opened, edited]
 
+permissions:
+  contents: write       # Enables attacks 1 & 2
+  actions: write        # Enables attack 3
+  pull-requests: write  # For the auto-labeler functionality
+  
 jobs:
   label-pr:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     outputs:
       should_validate: ${{ steps.check.outputs.should_validate }}
     steps:
